@@ -115,10 +115,12 @@ class DateTimeField(Field):
 class DecimalField(Field):
     def run_validate(self, k, value):
         try:
-            if len(value) > (self.max_digits + 1):
-                raise
-            if "." in value and len(value.split(".")[-1]) > self.decimal_places:
-                raise
+            if "." in value:
+                if len(value.split(".")[-1]) > self.decimal_places:
+                    raise
+            else:
+                if len(value) > self.max_digits:
+                    raise
             return True, decimal.Decimal(value)
         except:
             return False, self.error_message or "parameter %s not valid" % k

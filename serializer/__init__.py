@@ -33,7 +33,7 @@ class Field:
     def __init__(self, label="", required=False, 
                 default=None, error_message="",
                 min_length=0, max_length=0,
-                min_value=0, max_value=0,
+                min_value=None, max_value=None,
                 choices=[], regexp=None,
                 pattern="", max_digits = 0,
                 decimal_places = 0):
@@ -71,9 +71,10 @@ class IntegerField(Field):
     def run_validate(self, k, value):
         try:
             value = int(value)
-            if self.min_value and value < self.min_value or self.max_value and value > self.max_value:
+            if self.min_value is not None and value < self.min_value or self.max_value is not None and value > self.max_value:
+                return True, value
+            else:
                 raise
-            return True, value
         except:
             return False, self.error_message or "parameter %s not valid" % k
 
@@ -122,7 +123,7 @@ class DecimalField(Field):
                 if len(value) > self.max_digits:
                     raise
             value = decimal.Decimal(value)
-            if self.min_value and value > self.min_value or self.max_value and value < self.max_value:
+            if self.min_value is not None and value < self.min_value or self.max_value is not None and value > self.max_value:
                 return True, value
             else:
                 raise

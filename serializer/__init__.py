@@ -71,7 +71,7 @@ class IntegerField(Field):
     def run_validate(self, k, value):
         try:
             value = int(value)
-            if self.min_value and value <= self.min_value or self.max_value and value >= self.max_value:
+            if self.min_value and value < self.min_value or self.max_value and value > self.max_value:
                 raise
             return True, value
         except:
@@ -122,7 +122,7 @@ class DecimalField(Field):
                 if len(value) > self.max_digits:
                     raise
             value = decimal.Decimal(value)
-            if self.min_length and l >= self.min_length or self.max_length and l <= self.max_length:
+            if self.min_value and value > self.min_value or self.max_value and value < self.max_value:
                 return True, value
         except:
             return False, self.error_message or "parameter %s not valid" % k

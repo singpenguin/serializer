@@ -112,6 +112,8 @@ class DateField(Field):
     pattern = "%Y-%m-%d"
     def run_validate(self, k, value):
         try:
+            if not value:
+                raise
             dt = datetime.datetime.strptime(value, self.pattern)
             return True, dt
         except:
@@ -121,6 +123,8 @@ class DateTimeField(Field):
     pattern = "%Y-%m-%d %H:%M:%S"
     def run_validate(self, k, value):
         try:
+            if not value:
+                raise
             dt = datetime.datetime.strptime(value, self.pattern)
             return True, dt
         except:

@@ -71,10 +71,16 @@ class IntegerField(Field):
     def run_validate(self, k, value):
         try:
             value = int(value)
-            if self.min_value is not None and value < self.min_value or self.max_value is not None and value > self.max_value:
-                return True, value
-            else:
-                raise
+            if self.min_value and self.max_value:
+                if not self.min_value <= value <= self.max_value:
+                    raise
+            elif self.max_value is not None:
+                if value > self.max_value:
+                    raise
+            elif self.min_value is not None:
+                if value < self.min_value:
+                    raise
+            return True, value
         except:
             return False, self.error_message or "parameter %s not valid" % k
 
@@ -85,8 +91,15 @@ class CharField(Field):
                 return True, value
         else:
             l = len(value)
-            if self.min_length and l >= self.min_length or self.max_length and l <= self.max_length:
-                return True, value
+            if self.min_length and self.max_length:
+                if self.min_length <= l <= self.max_length:
+                    return True, value
+            elif self.min_length is not None:
+                if self.min_length <= l:
+                    return True, value
+            elif self.max_length is not None:
+                if self.max_length >= l:
+                    return True, value
         return False, self.error_message or "parameter %s not valid" % k
 
 class ChoiceField(Field):
@@ -123,10 +136,16 @@ class DecimalField(Field):
                 if len(value) > self.max_digits:
                     raise
             value = decimal.Decimal(value)
-            if self.min_value is not None and value < self.min_value or self.max_value is not None and value > self.max_value:
-                return True, value
-            else:
-                raise
+            if self.min_value and self.max_value:
+                if not self.min_value <= value <= self.max_value:
+                    raise
+            elif self.max_value is not None:
+                if value > self.max_value:
+                    raise
+            elif self.min_value is not None:
+                if value < self.min_value:
+                    raise
+            return True, value
         except:
             return False, self.error_message or "parameter %s not valid" % k
 

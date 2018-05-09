@@ -16,9 +16,13 @@ class Serializer:
             if not k.startswith('_'):
                 self.__data__[k] = v
 
+    def update(self, data):
+        pass
+
     def is_valid(self, data):
         self.error = ""
         self.data = {}
+        self.update(data)
         for k, v in self.__data__.items():
             res, value = v.validate(k, data)
             if not res:

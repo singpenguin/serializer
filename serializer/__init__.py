@@ -46,7 +46,8 @@ class Field:
         self.max_value = max_value
         self.choices = choices
         self.error_message = error_message
-        self.pattern = pattern
+        if pattern:
+            self.pattern = pattern
         self.max_digits = max_digits
         self.decimal_places = decimal_places
 

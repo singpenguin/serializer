@@ -124,6 +124,8 @@ class DecimalField(Field):
             value = decimal.Decimal(value)
             if self.min_value and value > self.min_value or self.max_value and value < self.max_value:
                 return True, value
+            else:
+                raise
         except:
             return False, self.error_message or "parameter %s not valid" % k
 

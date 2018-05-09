@@ -60,7 +60,7 @@ class Field:
             return True, self.default
         return self.run_validate(k, data.get(k))
 
-class EmailFiled(Field):
+class EmailField(Field):
     reg = re.compile("^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$")
     def run_validate(self, k, value):
         if self.reg.match(value):

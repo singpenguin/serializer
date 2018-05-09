@@ -28,7 +28,7 @@ class Serializer:
                 self.error = value
                 return False
             else:
-                self.k = value
+                setattr(self, k, value)
         return True
 
 class Field:

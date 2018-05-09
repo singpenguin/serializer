@@ -7,7 +7,7 @@ from setuptools.command.test import test as TestCommand
 
 def read():
     """Build a file path from *paths* and return the contents."""
-    with codecs.open(os.path.join('README.rst'), 'r', "utf-8") as f:
+    with codecs.open(os.path.join('README.md'), 'r', "utf-8") as f:
         return f.read()
 
 class PyTest(TestCommand):

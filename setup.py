@@ -40,7 +40,7 @@ class PyTest(TestCommand):
 
 setup(
     name='serializer',
-    version='0.1.8',
+    version='0.1.9',
     description='serializer and validate request parameters',
     long_description=read(),
     url='https://github.com/singpenguin/serializer/',

@@ -21,7 +21,6 @@ class Serializer:
 
     def is_valid(self, data):
         self.error = ""
-        self.data = {}
         self.update(data)
         for k, v in self.__data__.items():
             res, value = v.validate(k, data)
@@ -29,7 +28,7 @@ class Serializer:
                 self.error = value
                 return False
             else:
-                self.data[k] = value
+                self.k = value
         return True
 
 class Field:

@@ -1,2 +1,2 @@
 # Serializer
-Web request parameters serializer
+Web request parameters validator
